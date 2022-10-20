@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:56:02 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/19 15:01:56 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:11:41 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ t_list	*rev_rot_a(t_list *a)
 	last->before = NULL;
 	first->before = last;
 	before_last->next = NULL;
-	return(last);
+	write(1, "rra\n", 4);
+	return (last);
 }
 
-t_list	rev_rot_b(t_list *b)
+t_list	*rev_rot_b(t_list *b)
 {
 	t_list	*first;
 	t_list	*before_last;
@@ -53,14 +54,82 @@ t_list	rev_rot_b(t_list *b)
 	last->before = NULL;
 	first->before = last;
 	before_last->next = NULL;
-	return(last);
+	write(1, "rrb\n", 4);
+	return (last);
 }
 
-/*void	rev_rot_r(int n1, int n2)
+void	rev_rot_r(t_list *a, t_list *b)
 {
+	if (!a || !b || a->next == NULL || b->next == NULL)
+		return ;
+	a = rev_rot_a(a);
+	b = rev_rot_b(b);
+	write(1, "rrr\n", 4);
 }
+
+/*   MAIN TEST RRR */
 
 int main()
+{
+	t_list	*test = NULL;
+	t_list	*test1 = NULL;
+	int	n = 0;
+	int	n1 = 3;
+
+	if (!test)
+		test = lstnew(n++);
+	while (n < 4)
+		lstadd_end(&test, lstnew(n++));
+	if (!test1)
+		test1 = lstnew(n1--);
+	printf("\nlist a : ");
+	while (test != NULL)
+	{
+		printf("%d ", test->content);
+		if (test->next == NULL)
+			break ;
+		test = test->next;
+	}
+	while (n1 >= 0)
+		lstadd_end(&test1, lstnew(n1--));
+	printf("\nlist b : ");
+	while (test1 != NULL)
+	{
+		printf("%d ", test1->content);
+		if (test1->next == NULL)
+			break ;
+		test1 = test1->next;
+	}
+	printf("\nREVERSE ROTATE : ");
+	while (test->before != NULL)
+		test = test->before;
+	while (test1->before != NULL)
+		test1 = test1->before;
+	rev_rot_r(test, test1);
+	printf("\nlist a : ");
+	while (test != NULL)
+	{
+		printf("%d ", test->content);
+		if (test->next == NULL)
+			break ;
+		test = test->next;
+	}
+	//lstclear(&test);
+	printf("\nlist b : ");
+	while (test1 != NULL)
+	{
+		printf("%d ", test1->content);
+		if (test1->next == NULL)
+			break ;
+		test1 = test1->next;
+	}
+	//lstclear(&test1);
+	return (0);
+}
+
+/*   MAIN TEST RRA & RRB */
+
+/*int main()
 {
 	t_list	*test = NULL;
 	int	n = 0;
@@ -76,10 +145,10 @@ int main()
 			break ;
 		test = test->next;
 	}
-	printf("\nROTATE : \n");
+	printf("\nREVERSE ROTATE : \n");
 	while (test->before != NULL)
 		test = test->before;
-	test = rev_rot_a(test);
+	test = rev_rot_b(test);
 	while (test != NULL)
 	{
 		printf("%d ", test->content);

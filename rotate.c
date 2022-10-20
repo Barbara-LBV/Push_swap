@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:54:33 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/19 14:14:29 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:43:43 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_list	*rotate_a(t_list *a)
 	first->before = last;
 	last->next = first;
 	second->before = NULL;
+	write(1, "ra\n", 3);
 	return(second);
 }
 
@@ -53,15 +54,20 @@ t_list	*rotate_b(t_list *b)
 	first->before = last;
 	last->next = first;
 	second->before = NULL;
+	write(1, "rb\n", 3);
 	return(second);
 }
 
-/*void	rotate_r(t_list *a, t_list *b)
+void	rotate_r(t_list *a, t_list *b)
 {
-	t_list	
-}*/
+	if (!a || !b || a->next == NULL || b->next == NULL)
+		return ;
+	a = rotate_a(a);
+	b = rotate_b(b);
+	write(1, "rr\n", 3);
+}
 
-int main()
+/*int main()
 {
 	t_list	*test = NULL;
 	int	n = 0;
@@ -90,4 +96,4 @@ int main()
 	}
 	lstclear(&test);
 	return (0);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:39:10 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/19 15:57:36 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:56:32 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_list	*rev_rot_b(t_list *b);
 void	rev_rot_r(t_list *a,t_list *b);
 t_list	*push_a(t_list *a, t_list *b);
 t_list	*push_b(t_list *a, t_list *b);
+t_list	*ft_pb(t_list *a, t_list *b);
 t_list	*swap_a(t_list *a);
 t_list	*swap_b(t_list *b);
 void	swap_s(t_list *a, t_list *b);

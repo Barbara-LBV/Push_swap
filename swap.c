@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:52:48 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/20 15:44:20 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:28:24 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_list	*swap_b(t_list *b)
 	return (second);
 }
 
-void	swap_s(t_list *a,t_list *b)
+void	swap_s(t_list *a, t_list *b)
 {
 	if ((!a && !b) || a->next == NULL || b->next == NULL)
 		return ;

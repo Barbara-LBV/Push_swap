@@ -6,7 +6,7 @@
 #    By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/13 11:53:47 by blefebvr          #+#    #+#              #
-#    Updated: 2022/10/18 11:51:37 by blefebvr         ###   ########.fr        #
+#    Updated: 2022/10/21 16:14:28 by blefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRCS := push.c \
 	list_utils.c\
 	swap.c \
 	rotate.c \
-	rev_rotate.c
+	rev_rotate.c \
+	push_swap.c \
+	args_utils.c
 
 # bonus source files
 

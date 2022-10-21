@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:56:02 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/20 15:11:41 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/10/21 11:31:41 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	rev_rot_r(t_list *a, t_list *b)
 	b = rev_rot_b(b);
 	write(1, "rrr\n", 4);
 }
+/*
 
-/*   MAIN TEST RRR */
+//   MAIN TEST RRR
 
 int main()
 {
@@ -127,9 +128,9 @@ int main()
 	return (0);
 }
 
-/*   MAIN TEST RRA & RRB */
+//   MAIN TEST RRA & RRB
 
-/*int main()
+int main()
 {
 	t_list	*test = NULL;
 	int	n = 0;

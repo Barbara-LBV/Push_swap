@@ -6,64 +6,64 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:56:02 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/21 11:31:41 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:35:44 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*rev_rot_a(t_list *a)
+void	rev_rot_a(t_list **a)
 {
 	t_list	*first;
 	t_list	*before_last;
 	t_list	*last;
 
-	if (!a || a->next == NULL)
-		return (NULL);
-	first = a;
-	while (a->next != NULL)
-	{
-		a = a->next;
-		last = a;
-	}
-	before_last = a->before;
-	last->next = first;
-	last->before = NULL;
-	first->before = last;
-	before_last->next = NULL;
-	write(1, "rra\n", 4);
-	return (last);
-}
-
-t_list	*rev_rot_b(t_list *b)
-{
-	t_list	*first;
-	t_list	*before_last;
-	t_list	*last;
-
-	if (!b || b->next == NULL)
-		return (NULL);
-	first = b;
-	while (b->next != NULL)
-	{
-		b = b->next;
-		last = b;
-	}
-	before_last = b->before;
-	last->next = first;
-	last->before = NULL;
-	first->before = last;
-	before_last->next = NULL;
-	write(1, "rrb\n", 4);
-	return (last);
-}
-
-void	rev_rot_r(t_list *a, t_list *b)
-{
-	if (!a || !b || a->next == NULL || b->next == NULL)
+	if (!(*a) || (*a)->next == NULL)
 		return ;
-	a = rev_rot_a(a);
-	b = rev_rot_b(b);
+	first = *a;
+	while ((*a)->next != NULL)
+	{
+		*a = (*a)->next;
+		last = *a;
+	}
+	before_last = (*a)->before;
+	last->next = first;
+	last->before = NULL;
+	first->before = last;
+	before_last->next = NULL;
+	*a = last;
+	write(1, "rra\n", 4);
+}
+
+void	rev_rot_b(t_list **b)
+{
+	t_list	*first;
+	t_list	*before_last;
+	t_list	*last;
+
+	if (!(*b) || (*b)->next == NULL)
+		return ;
+	first = *b;
+	while ((*b)->next != NULL)
+	{
+		*b = (*b)->next;
+		last = *b;
+	}
+	before_last = (*b)->before;
+	last->next = first;
+	last->before = NULL;
+	first->before = last;
+	before_last->next = NULL;
+	*b = last;
+	write(1, "rrb\n", 4);
+}
+
+void	rev_rot_r(t_list **a, t_list **b)
+{
+	if (!(*a) || !(*b) || (*a)->next == NULL || (*b)->next == NULL)
+		return ;
+	rev_rot_a(a);
+	rev_rot_b(b);
 	write(1, "rrr\n", 4);
 }
 /*

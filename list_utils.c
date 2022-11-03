@@ -6,22 +6,22 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:24:57 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/21 14:13:12 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/03 11:59:36 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*firstelement(t_list *lst)
+t_list	*firstelement(t_list **lst)
 {
 	t_list	*tmp;
 
 	if (!lst)
 		return (NULL);
-	tmp = lst;
+	tmp = *lst;
 	while (tmp != NULL && tmp->before != NULL)
 	{
-	tmp = tmp->before;
+		tmp = tmp->before;
 		if (tmp->before == NULL)
 			break ;
 	}
@@ -88,6 +88,15 @@ void	lstclear(t_list **lst)
 	}
 	*lst = NULL;
 }
+
+/*void	lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (lst == NULL)
+		return ;
+	del(lst->content);
+	del(lst->index);
+	free(lst);
+}*/
 
 /*int main()
 {

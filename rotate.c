@@ -6,87 +6,102 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:54:33 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/10/21 11:30:37 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/03 13:44:17 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*rotate_a(t_list *a)
+void	rotate_a(t_list **a)
 {
 	t_list	*first;
 	t_list	*second;
 	t_list	*last;
 
-	if (!a || a->next == NULL)
-		return (NULL);
-	first = a;
-	second = a->next;
-	while (a->next != NULL)
-	{
-		a = a->next;
-		last = a;
-	}
-	first->next = NULL;
-	first->before = last;
-	last->next = first;
-	second->before = NULL;
-	write(1, "ra\n", 3);
-	return (second);
-}
-
-t_list	*rotate_b(t_list *b)
-{
-	t_list	*first;
-	t_list	*second;
-	t_list	*last;
-
-	if (!b || b->next == NULL)
-		return (NULL);
-	first = b;
-	second = b->next;
-	while (b->next != NULL)
-	{
-		b = b->next;
-		last = b;
-	}
-	first->next = NULL;
-	first->before = last;
-	last->next = first;
-	second->before = NULL;
-	write(1, "rb\n", 3);
-	return (second);
-}
-
-void	rotate_r(t_list *a, t_list *b)
-{
-	if (!a || !b || a->next == NULL || b->next == NULL)
+	if (!(*a) || (*a)->next == NULL)
 		return ;
-	a = rotate_a(a);
-	b = rotate_b(b);
+	first = *a;
+	second = (*a)->next;
+	while ((*a)->next != NULL)
+	{
+		*a = (*a)->next;
+		last = *a;
+	}
+	first->next = NULL;
+	first->before = last;
+	last->next = first;
+	second->before = NULL;
+	*a = last; 
+	write(1, "ra\n", 3);
+}
+
+void	rotate_b(t_list **b)
+{
+	t_list	*first;
+	t_list	*second;
+	t_list	*last;
+
+	if (!(*b) || (*b)->next == NULL)
+		return ;
+	first = *b;
+	second = (*b)->next;
+	while ((*b)->next != NULL)
+	{
+		*b = (*b)->next;
+		last = *b;
+	}
+	first->next = NULL;
+	first->before = last;
+	last->next = first;
+	second->before = NULL;
+	*b = last; 
+	write(1, "rb\n", 3);
+}
+
+void	rotate_r(t_list **a, t_list **b)
+{
+	if (!(*a) || !(*b) || (*a)->next == NULL || (*b)->next == NULL)
+		return ;
+	rotate_a(a);
+	rotate_b(b);
 	write(1, "rr\n", 3);
 }
 
 /*int main()
 {
 	t_list	*test = NULL;
+	t_list	*test1 = NULL;
 	int	n = 0;
+	int	n1 = 4;
 
-	if (!test)
-		test = lstnew(n++);
+	test = lstnew(n++);
+	test1 = lstnew(n1--);
 	while (n < 4)
 		lstadd_end(&test, lstnew(n++));
+	while (n1 > 0)
+		lstadd_end(&test1, lstnew(n1--));
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
 		if (test->next == NULL)
 			break ;
 		test = test->next;
+	}
+	printf("\n");
+	while (test1 != NULL)
+	{
+		printf("%d ", test1->content);
+		if (test1->next == NULL)
+			break ;
+		test1 = test1->next;
 	}
 	printf("\nROTATE : \n");
-	while (test->before != NULL)
-		test = test->before;
-	test = rotate_a(test);
+	test = firstelement(&test);
+	test1 = firstelement(&test1);
+	rotate_r(&test, &test1);
+	//rotate_b(&test1);
+	test = firstelement(&test);
+	test1 = firstelement(&test1);
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
@@ -94,6 +109,15 @@ void	rotate_r(t_list *a, t_list *b)
 			break ;
 		test = test->next;
 	}
+	printf("\n");
+	while (test1 != NULL)
+	{
+		printf("%d ", test1->content);
+		if (test1->next == NULL)
+			break ;
+		test1 = test1->next;
+	}
 	lstclear(&test);
+	lstclear(&test1);
 	return (0);
 }*/

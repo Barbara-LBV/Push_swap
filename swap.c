@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:52:48 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/03 14:55:06 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:25:04 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@ void	swap_a(t_list **a)
 	first = *a;
 	second = (*a)->next;
 	if ((*a)->next->next != NULL)
+	{
 		third = (*a)->next->next;
+		first->next = third;
+		third->before = first;
+	}
 	else
+	{
 		third = NULL;
+		first->next = NULL;
+	}
 	first->before = second;
-	first->next = third;
 	second->before = NULL;
 	second->next = first;
-	third->before = first;
 	*a = second;
 	write(1, "sa\n", 3);
 }
@@ -46,12 +51,19 @@ void	swap_b(t_list **b)
 	first = *b;
 	second = (*b)->next;
 	if ((*b)->next->next != NULL)
+	{
 		third = (*b)->next->next;
+		first->next = third;
+		third->before = first;
+	}
+	else
+	{
+		third = NULL;
+		first->next = NULL;
+	}
 	first->before = second;
-	first->next = third;
 	second->before = NULL;
 	second->next = first;
-	third->before = first;
 	*b = second;
 	write(1, "sb\n", 3);
 }
@@ -68,7 +80,7 @@ void	swap_s(t_list **a, t_list **b)
 /*int main()
 {
 	t_list	*test = NULL;
-	int	n = 3;
+	int	n = 4;
 
 	if (!test)
 		test = lstnew(n--);
@@ -82,9 +94,11 @@ void	swap_s(t_list **a, t_list **b)
 		test = test->next;
 	}
 	printf("\nSWAP A!! : \n");
-	while (test->before != NULL)
-		test = test->before;
+	test = firstelement(&test);
 	swap_a(&test);
+	test = firstelement(&test);
+	//swap_a(&test);
+	//test = firstelement(&test);
 	while (test != NULL)
 	{
 		printf("%d ", test->content);

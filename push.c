@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:49:35 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/03 13:46:09 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:07:51 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ void	push_a(t_list **a, t_list **b)
 	t_list	*test1 = NULL;
 	t_list	*test2 = NULL;
 	int n1=0;
-//	int n2=4;
+	int n2=4;
 	if (!test1)
 		test1 = lstnew(n1++);
-//	if (!test2)
-//		test2 = lstnew(n2--);
+	if (!test2)
+		test2 = lstnew(n2--);
 	while (n1 < 4)
 		lstadd_end(&test1, lstnew(n1++));
-//	while (n2 > 0)
-//		lstadd_end(&test2, lstnew(n2--));
+	while (n2 > 0)
+		lstadd_end(&test2, lstnew(n2--));
 	printf("list A\n");
 	if (test1 == NULL)
 		printf("la liste A est vide");
@@ -101,15 +101,15 @@ void	push_a(t_list **a, t_list **b)
 	printf("\nPUSH A\nNew list A\n");
 	test1 = firstelement(&test1);
 	test2 = firstelement(&test2);
+	push_a(&test1, &test2);
+	//test1 = firstelement(&test1);
+	//test2 = firstelement(&test2);
 	push_b(&test1, &test2);
-	test1 = firstelement(&test1);
-	test2 = firstelement(&test2);
-	push_b(&test1, &test2);
-	test1 = firstelement(&test1);
-	test2 = firstelement(&test2);
-	push_b(&test1, &test2);
-	test1 = firstelement(&test1);
-	test2 = firstelement(&test2);
+	//test1 = firstelement(&test1);
+	//test2 = firstelement(&test2);
+	push_a(&test1, &test2);
+	//test1 = firstelement(&test1);
+	//test2 = firstelement(&test2);
 	while (test1 != NULL)
 	{
 		printf("%d ", test1->content);

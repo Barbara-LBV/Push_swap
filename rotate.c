@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:54:33 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/03 13:44:17 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:37:54 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	rotate_a(t_list **a)
 	first->before = last;
 	last->next = first;
 	second->before = NULL;
-	*a = last; 
+	(*a) = second;
 	write(1, "ra\n", 3);
 }
 
@@ -54,7 +54,7 @@ void	rotate_b(t_list **b)
 	first->before = last;
 	last->next = first;
 	second->before = NULL;
-	*b = last; 
+	(*b) = second;
 	write(1, "rb\n", 3);
 }
 
@@ -97,11 +97,14 @@ void	rotate_r(t_list **a, t_list **b)
 	}
 	printf("\nROTATE : \n");
 	test = firstelement(&test);
-	test1 = firstelement(&test1);
-	rotate_r(&test, &test1);
-	//rotate_b(&test1);
+	test = firstelement(&test1);
+	rotate_b(&test);
 	test = firstelement(&test);
-	test1 = firstelement(&test1);
+	rotate_b(&test);
+	test = firstelement(&test);
+	rotate_b(&test);
+	test = firstelement(&test);
+	test = firstelement(&test);
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
@@ -109,6 +112,7 @@ void	rotate_r(t_list **a, t_list **b)
 			break ;
 		test = test->next;
 	}
+	test = firstelement(&test);
 	printf("\n");
 	while (test1 != NULL)
 	{

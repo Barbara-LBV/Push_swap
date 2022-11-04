@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:56:02 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/02 18:35:44 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:39:58 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	rev_rot_r(t_list **a, t_list **b)
 	rev_rot_b(b);
 	write(1, "rrr\n", 4);
 }
-/*
 
+/*
 //   MAIN TEST RRR
 
 int main()
@@ -137,7 +137,7 @@ int main()
 
 	if (!test)
 		test = lstnew(n++);
-	while (n < 4)
+	while (n < 2)
 		lstadd_end(&test, lstnew(n++));
 	while (test != NULL)
 	{
@@ -147,9 +147,15 @@ int main()
 		test = test->next;
 	}
 	printf("\nREVERSE ROTATE : \n");
-	while (test->before != NULL)
-		test = test->before;
-	test = rev_rot_b(test);
+	test = firstelement(&test);
+	rev_rot_a(&test);
+	test = firstelement(&test);
+	rev_rot_a(&test);
+	test = firstelement(&test);
+	rev_rot_a(&test);
+	test = firstelement(&test);
+	rev_rot_a(&test);
+	test = firstelement(&test);
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
@@ -159,4 +165,5 @@ int main()
 	}
 	lstclear(&test);
 	return (0);
-}*/
+}
+*/

@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:13 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/03 15:29:20 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:24:05 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_sorting(t_list **lst)
 	t_list	*tmp;
 
 	tmp = NULL;
+	if (!(*lst))
+		return (1);
 	while ((*lst)->next != NULL)
 	{
 		tmp = (*lst)->next;
@@ -27,7 +29,7 @@ int	check_sorting(t_list **lst)
 			tmp = tmp->next;
 		}
 		if ((*lst)->index > tmp->index)
-			return(0);
+			return (0);
 		*lst = (*lst)->next;
 	}
 	return (1);
@@ -63,15 +65,14 @@ void	sort_three_nb(t_list **a)
 {
 	t_list	*tmp1;
 	t_list	*tmp2;
-	t_list	*tmp3;
 
 	if (!(*a) || (*a)->next == NULL || (*a)->next->next == NULL)
 		return ;
 	tmp1 = *a;
 	tmp2 = (*a)->next;
-	tmp3 = (*a)->next->next;
-	if (tmp1->index < tmp2->index && tmp3->index == 3)
+	if (check_sorting(a))
 		return ;
+	*a = firstelement(a);
 	if (tmp1->index == 3)
 		rotate_a(a);
 	else if (tmp2->index == 3)
@@ -80,46 +81,64 @@ void	sort_three_nb(t_list **a)
 	tmp2 = (*a)->next;
 	if (tmp1->index > tmp2->index)
 		swap_a(a);
+	*a = firstelement(a);
 }
 
 void	sort_five_nb(t_list **a, t_list **b)
 {
-	t_list	*tmp;
+	//int	i;
+	//t_list	*tmp;
 
-	tmp = (*a)->next;
-	while ((*a)->index < 6)
-	{
-		if ((*a)->index != 1 || (*a)->index != 2)
-			rotate_a(a);
-		if ((*a)->index == 1 || (*a)->index == 2)
-		{
-			push_b(a, b);
-			(*a)->before = NULL;
-			*a = tmp;
-		}
-	}
+	//i = 0;
+	//tmp = *a;
+	/*if (check_sorting(a))
+		return ;*/
+	if ((*a)->index == 1 || (*a)->index == 2)
+		push_b(a, b);
+	if ((*a)->index != 1 || (*a)->next->index)
+		rotate_a(a);
+	if ((*a)->index == 1 || (*a)->index == 2)
+		push_b(a, b);
 	if (!check_sorting(a))
 		sort_three_nb(a);
-	if (check_sorting(b))
+	if (check_sorting(b) && (*b)->next != NULL)
 		swap_b(b);
-	if (check_sorting(a) && !(check_sorting(b)))
+	while ((*b)->next != NULL)
 	{
-		while ((*b)->next != NULL)
-		{
-			push_a(a, b);
-			*b = (*b)->next;
-		}
+		push_a(a, b);
+		(*b) = (*b)->next;
 	}
 }
 
-/*void	sort_nb(t_list *a, t_list *b)
+void	print_list(t_list **a, t_list **b)
 {
-	
-}*/
+	*a = firstelement(a);
+	*b = firstelement(b);
+	while ((*a) != NULL)
+	{
+		printf("%d ", (*a)->content);
+		if ((*a)->next == NULL)
+			break ;
+		*a = (*a)->next;
+	}
+	printf("\n");
+	while ((*b) != NULL)
+	{
+		printf("%d ", (*b)->content);
+		if ((*b)->next == NULL)
+			break ;
+		*b = (*b)->next;
+	}
+	printf("\n");
+	*a = firstelement(a);
+	*b = firstelement(b);
+
+}
 
 int main(int argc, char **argv)
 {
-	t_list	*test = NULL;;
+	t_list	*test = NULL;
+	t_list	*test1 = NULL;
 	int i = 1;
 
 	if (!test)
@@ -144,16 +163,21 @@ int main(int argc, char **argv)
 		test = test->next;
 	}
 	test = firstelement(&test);
-	printf("\n SORT THREE NB : \n");
-	test = firstelement(&test);
-	sort_three_nb(&test);
-	test = firstelement(&test);
+	printf("\n SORT 5 NB : \n");
+	sort_five_nb(&test, &test1);
+	printf("\n new list a\n");
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
 		if (test->next == NULL)
 			break ;
 		test = test->next;
+	}
+	printf("\n new list b\n");
+	while (test1->next != NULL)
+	{
+		printf("%d ", test1->content);
+		test1 = test1->next;
 	}
 	lstclear(&test);
 	return (0);

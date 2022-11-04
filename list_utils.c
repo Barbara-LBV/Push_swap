@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:24:57 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/03 11:59:36 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/04 11:48:03 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*firstelement(t_list **lst)
 {
 	t_list	*tmp;
 
-	if (!lst)
+	if (!(*lst))
 		return (NULL);
 	tmp = *lst;
 	while (tmp != NULL && tmp->before != NULL)

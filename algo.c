@@ -86,19 +86,23 @@ void	sort_three_nb(t_list **a)
 
 void	sort_five_nb(t_list **a, t_list **b)
 {
-	//int	i;
-	//t_list	*tmp;
+	int	i;
 
-	//i = 0;
-	//tmp = *a;
-	/*if (check_sorting(a))
-		return ;*/
-	if ((*a)->index == 1 || (*a)->index == 2)
-		push_b(a, b);
-	if ((*a)->index != 1 || (*a)->next->index)
-		rotate_a(a);
-	if ((*a)->index == 1 || (*a)->index == 2)
-		push_b(a, b);
+	i = get_sizelst(b);
+	if (check_sorting(a) == 1)
+		return ;
+	while (i < 2)
+	{
+		if ((*a)->index == 1 || (*a)->index == 2)
+			push_b(a, b);
+		else if ((*a)->index != 1 || (*a)->next->index)
+			rotate_a(a);
+		*a = firstelement(a);
+		*b = firstelement(a);
+		i = get_sizelst(b);
+	}
+	/*if ((*a)->index == 1 || (*a)->index == 2)
+		push_b(a, b);*/
 	if (!check_sorting(a))
 		sort_three_nb(a);
 	if (check_sorting(b) && (*b)->next != NULL)
@@ -165,6 +169,7 @@ int main(int argc, char **argv)
 	test = firstelement(&test);
 	printf("\n SORT 5 NB : \n");
 	sort_five_nb(&test, &test1);
+	test = firstelement(&test);
 	printf("\n new list a\n");
 	while (test != NULL)
 	{
@@ -180,5 +185,6 @@ int main(int argc, char **argv)
 		test1 = test1->next;
 	}
 	lstclear(&test);
+	lstclear(&test1);
 	return (0);
 }

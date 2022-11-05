@@ -50,6 +50,7 @@ void	sort_nb(t_list **a, t_list **b);
 void	get_index(t_list *a);
 int	check_sorting(t_list **lst);
 int	check_double(t_list **a);
+int	get_sizelst(t_list **a);
 int	check_parsing(t_list *a, char *s);
 int	check_nb(char *s);
 int	check_flow(long int n);

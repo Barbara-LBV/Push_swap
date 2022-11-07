@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:24:57 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/04 11:48:03 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:21:11 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,20 @@ t_list	*lstnew(int content)
 	new->content = content;
 	new->next = NULL;
 	new->before = NULL;
-	/*new->index = 1;*/
-	/*new->binary = NULL;*/
+	return (new);
+}
+
+t_list	*lstnew_node(t_list *lst)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = lst->content;
+	new->index = lst->index;
+	new->next = NULL;
+	new->before = NULL;
 	return (new);
 }
 
@@ -75,18 +87,17 @@ void	lstclear(t_list **lst)
 {
 	t_list	*tmp;
 
-	if ((*lst)->before != NULL)
-	{
-		while ((*lst)->before != NULL)
-			(*lst) = (*lst)->before;
-	}
+	if ((*lst) == NULL)
+		return ;
+	while ((*lst)->before != NULL)
+		(*lst) = (*lst)->before;
 	while (*lst)
 	{
 		tmp = *lst;
 		(*lst) = (*lst)->next;
 		free(tmp);
 	}
-	*lst = NULL;
+	free(*lst);
 }
 
 /*void	lstdelone(t_list *lst, void (*del)(void*))

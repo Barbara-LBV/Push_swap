@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:40:55 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/03 14:18:42 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:50:12 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,27 +62,17 @@ t_list	*get_list(t_list **a, int content)
 	return (*a);
 }
 
-int	ft_atoi(const char *str)
+int	check_parsing(t_list *a, char *s)
 {
-	int	i;
-	int	nb;
-	int	neg;
+	long int	nb;
 
-	i = 0;
-	nb = 0;
-	neg = 1;
-	if (*str == '-')
+	nb = ft_atoi(s);
+	if (check_nb(s) == 1 || check_flow(nb) == 1 || check_double(a) == 1)
 	{
-		neg *= -1;
-		str++;
+		write(2, "Error\n", 6);
+		return (1);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb *= 10;
-		nb += str[i++] - '0';
-	}
-	nb *= neg;
-	return (nb);
+	return (0);
 }
 
 /*int main(int ac, char **av)

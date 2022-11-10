@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:24:57 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/07 16:21:11 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 11:10:20 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,33 +82,6 @@ t_list	*lstadd_first(t_list **lst, t_list *new)
 	tmp->before = new;
 	return (new);
 }
-
-void	lstclear(t_list **lst)
-{
-	t_list	*tmp;
-
-	if ((*lst) == NULL)
-		return ;
-	while ((*lst)->before != NULL)
-		(*lst) = (*lst)->before;
-	while (*lst)
-	{
-		tmp = *lst;
-		(*lst) = (*lst)->next;
-		free(tmp);
-	}
-	free(*lst);
-}
-
-/*void	lstdelone(t_list *lst, void (*del)(void*))
-{
-	if (lst == NULL)
-		return ;
-	del(lst->content);
-	del(lst->index);
-	free(lst);
-}*/
-
 /*int main()
 {
 	t_list	*test = NULL;

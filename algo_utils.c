@@ -1,15 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/10 11:04:15 by blefebvr          #+#    #+#             */
+/*   Updated: 2022/11/10 18:55:27 by blefebvr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	get_sizelst(t_list **b)
 {
-	int	i;
-	
+	t_list	*tmp;
+	int		i;
+
 	i = 1;
-	if ((*b) == NULL)
+	tmp = *b;
+	if (!tmp)
 		return (0);
-	while ((*b)->next != NULL)
+	while (tmp->next != NULL)
 	{
-		*b = (*b)->next;
+		tmp = tmp->next;
 		i++;
 	}
 	return (i);
@@ -17,9 +31,9 @@ int	get_sizelst(t_list **b)
 
 int	get_highest(t_list **a)
 {
-	int	cur_index;
-	int	highest;
 	t_list	*tmp;
+	int		cur_index;
+	int		highest;
 
 	if ((*a) == NULL)
 		return (0);
@@ -101,9 +115,10 @@ int	ft_atoi(const char *str)
 	i = 0;
 	nb = 0;
 	neg = 1;
-	if (*str == '-')
+	if (*str == '+' || *str == '-')
 	{
-		neg *= -1;
+		if (*str == '-')
+			neg *= -1;
 		str++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
@@ -125,9 +140,14 @@ int	ft_atoi(const char *str)
 		a = lstnew(ft_atoi(av[i++]));
 	while (i < ac)
 		lstadd_end(&a, lstnew(ft_atoi(av[i++])));
-	print_list(&a);
 	a = firstelement(&a);
 	get_index(a);
+	if (check_sorting(&a) == 0)
+		printf("la liste n'est pas triee\n");
+	else
+		printf("la liste est triee\n");
+	a = firstelement(&a);
+	//get_index(a);
 	printf(" GET INDEX\n");
 	a = firstelement(&a);
 	while (a != NULL)
@@ -140,5 +160,6 @@ int	ft_atoi(const char *str)
 	a = firstelement(&a);
 	n = get_highest(&a);
 	printf("\n valeur de highest : %d\n", n);
+	lstclear(&a);
 	return 0;
 }*/

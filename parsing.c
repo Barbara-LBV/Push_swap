@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:40:55 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/07 17:50:12 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:02:31 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	check_double(t_list **a)
 {
 	t_list	*tmp;
 
-	if (!(*a) || (*a)->next == NULL)
-		return (0);
+	//if (!(*a) || (*a)->next == NULL)
+	//	return (0);
 	tmp = (*a)->next;
 	while ((*a)->next != NULL)
 	{
@@ -36,9 +36,10 @@ int	check_nb(char *s)
 		return (1);
 	while (*s != '\0')
 	{
-		if (*s < 48 || *s > 57)
+		if ((*s >= 48 && *s <= 57) || *s == 45)
+			s++;
+		else
 			return (1);
-		s++;
 	}
 	return (0);
 }
@@ -55,19 +56,21 @@ int	check_flow(long int n)
 
 t_list	*get_list(t_list **a, int content)
 {
-	if (!a)
+	if (!(*a))
 		(*a) = lstnew(content);
 	else
 		lstadd_end(a, lstnew(content));
 	return (*a);
 }
 
-int	check_parsing(t_list *a, char *s)
+int	check_parsing(t_list **a, int content, char *s)
 {
 	long int	nb;
+	t_list	*tmp;
 
-	nb = ft_atoi(s);
-	if (check_nb(s) == 1 || check_flow(nb) == 1 || check_double(a) == 1)
+	tmp = *a;
+	nb = content;
+	if (check_nb(s) || check_flow(nb) || check_double(&tmp))
 	{
 		write(2, "Error\n", 6);
 		return (1);

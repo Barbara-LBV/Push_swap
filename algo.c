@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:13 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/07 17:51:32 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 18:54:02 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sort_three_nb(t_list **a)
 	t_list	*tmp2;
 	int	highest;
 
-	if (!(*a) || (*a)->next == NULL || (*a)->next->next == NULL)
+	if (!(*a) || (*a)->next == NULL)
 		return ;
 	tmp1 = *a;
 	tmp2 = (*a)->next;
@@ -26,53 +26,73 @@ void	sort_three_nb(t_list **a)
 	if (check_sorting(a))
 		return ;
 	if (tmp1->index == highest)
-		rotate_a(a);
+		ra(a);
 	else if (tmp2->index == highest)
-		rev_rot_a(a);
+		rra(a);
 	tmp1 = *a;
 	tmp2 = (*a)->next;
 	if (tmp1->index > tmp2->index)
-		swap_a(a);
+		sa(a);
 }
 
 void	sort_five_nb(t_list **a, t_list **b)
 {
 	int	i;
+	int	j;
 
-	i = get_sizelst(b);
+	i = get_sizelst(a);
+	j = get_sizelst(b);
+	if (i > 5 || i < 3)
+		return ;
 	if (check_sorting(a) == 1)
 		return ;
-	while (i < 2)
+	while (j < 2)
 	{
 		if ((*a)->index == 1 || (*a)->index == 2)
 			push_b(a, b);
 		else if ((*a)->index != 1 || (*a)->index != 2)
-			rotate_a(a);
-		i = get_sizelst(b);
-		*b = firstelement(b);
+			ra(a);
+		j = get_sizelst(b);
 	}
 	if (check_sorting(a) == 0)
 		sort_three_nb(a);
 	if (check_sorting(b) == 1 && (*b)->next != NULL)
-		swap_b(b);
+		sb(b);
 	while ((*b) != NULL)
 		push_a(a, b);
 }
 
-void	radix()
+/*void	radix_sorting(t_list **a, t_list **b)
 {
+}*/
+
+void	sort_list(t_list **a, t_list **b, int size)
+{
+	if (size < 2)
+		return ;
+	if (size <= 3)
+		sort_three_nb(a);
+	else if (size > 3 && size <= 5)
+		sort_five_nb(a, b);
+	/*else
+		radix_sorting(a, b);*/
 }
 
-/*int main(int argc, char **argv)
+int main(int ac, char **av)
 {
 	t_list	*test = NULL;
 	t_list	*test1 = NULL;
 	int i = 1;
 
-	if (!test)
-		test = lstnew(ft_atoi(argv[i++]));
-	while (i < argc)
-		lstadd_end(&test, lstnew(ft_atoi(argv[i++])));
+	if (ac < 2)
+		return (0);
+	while (av[i] != NULL)
+	{
+		test = get_list(&test, ft_atoi(av[i]));
+		if (check_parsing(&test, ft_atoi(av[i]), av[i]) == 1)
+			return (0);
+		i++;
+	}
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
@@ -82,19 +102,19 @@ void	radix()
 	}
 	test = firstelement(&test);
 	get_index(test);
-	printf("\n GET INDEX : \n");
+	printf("\n\n-->GET INDEX : \n");
 	while (test != NULL)
 	{
-		printf("%d ", test->index);
+		printf("index : %d   value : %d\n", test->index, test->content);
 		if (test->next == NULL)
 			break ;
 		test = test->next;
 	}
 	test = firstelement(&test);
-	printf("\n SORT 5 NB : \n");
-	sort_five_nb(&test, &test1);
-	test = firstelement(&test);
-	printf("\n new list a\n");
+	int size = get_sizelst(&test);
+	printf("\n-->SORT NB : \n");
+	sort_list(&test, &test1, size);
+	printf("\n-->New list a\n");
 	while (test != NULL)
 	{
 		printf("%d ", test->content);
@@ -102,15 +122,20 @@ void	radix()
 			break ;
 		test = test->next;
 	}
-	printf("\n new list b\n");
-	while (test1 != NULL)
+	if (test1 == NULL)
+		printf("\n-->List b is empty\n");
+	else
 	{
-		printf("%d ", test1->content);
-		if (test->next == NULL)
-			break ;
-		test1 = test1->next;
+	printf("\n\n-->New list b\n");
+		while (test1 != NULL)
+		{
+			printf("%d ", test1->content);
+			if (test->next == NULL)
+				break ;
+			test1 = test1->next;
+		}
 	}
 	lstclear(&test);
 	lstclear(&test1);
 	return (0);
-}*/
+}

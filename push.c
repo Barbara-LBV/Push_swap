@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:49:35 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/07 16:25:26 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:50:33 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	push_b(t_list **a, t_list **b)
 	}
 	else
 		lstclear(a);
+	write(1, "pb\n", 3);
 }
 
 void	push_a(t_list **a, t_list **b)
@@ -64,6 +65,7 @@ void	push_a(t_list **a, t_list **b)
 	}
 	else
 		lstclear(b);
+	write(1, "pa\n", 3);
 }
 
 /*int main()

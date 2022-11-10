@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:52:48 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/04 11:25:04 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:54:52 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	swap_a(t_list **a)
 	second->before = NULL;
 	second->next = first;
 	*a = second;
+}
+
+void	sa(t_list **a)
+{
+	swap_a(a);
 	write(1, "sa\n", 3);
 }
 
@@ -65,6 +70,11 @@ void	swap_b(t_list **b)
 	second->before = NULL;
 	second->next = first;
 	*b = second;
+}
+
+void	sb(t_list **b)
+{
+	swap_b(b);
 	write(1, "sb\n", 3);
 }
 

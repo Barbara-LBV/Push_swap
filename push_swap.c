@@ -6,26 +6,13 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:37:07 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/02 16:50:52 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:48:54 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	check_parsing(t_list *a, char *s)
-{
-	long int	nb;
-
-	nb = ft_atoi(s);
-	if (check_nb(s) == 1 || check_flow(nb) == 1 || check_double(a) == 1)
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
-	return (0);
-}
-
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_list	*a = NULL;
 	t_list	*b = NULL;
@@ -47,7 +34,7 @@ int main(int ac, char **av)
 		a = a->next;
 	}
 	printf("\n GET INDEX : \n");
-	a = firstelement(a);
+	a = firstelement(&a);
 	get_index(a);
 	while (a != NULL)
 	{

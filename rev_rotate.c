@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 16:56:02 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/04 11:39:58 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/10 10:50:08 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	rev_rot_a(t_list **a)
 	first->before = last;
 	before_last->next = NULL;
 	*a = last;
+}
+
+void	rra(t_list **a)
+{
+	rev_rot_a(a);
 	write(1, "rra\n", 4);
 }
 
@@ -55,6 +60,11 @@ void	rev_rot_b(t_list **b)
 	first->before = last;
 	before_last->next = NULL;
 	*b = last;
+}
+
+void	rrb(t_list **b)
+{
+	rev_rot_b(b);
 	write(1, "rrb\n", 4);
 }
 

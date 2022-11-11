@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:39:10 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/10 18:47:23 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:03:51 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_list	*lstnew(int content);
 t_list	*lstnew_node(t_list *lst);
 t_list	*lstadd_first(t_list **lst, t_list *new);
 t_list	*get_list(t_list **a, int n);
+void	radix_sorting(t_list **a, t_list **b);
 void	rotate_a(t_list **a);
 void	ra(t_list **a);
 void	rotate_b(t_list **b);
@@ -52,11 +53,11 @@ void	rev_rot_r(t_list **a, t_list **b);
 void	swap_s(t_list **a, t_list **b);
 void	sort_three_nb(t_list **a);
 void	sort_five_nb(t_list **a, t_list **b);
-void	radix_sorting(t_list **a, t_list **b);
 void	sort_list(t_list **a, t_list **b, int size);
 void	sort_nb(t_list **a, t_list **b);
 void	get_index(t_list *a);
 void	check_zero_neg(t_list *lst, t_list *lst1);
+char	*to_bin(int nb);
 int		check_sorting(t_list **lst);
 int		check_double(t_list **a);
 int		get_sizelst(t_list **a);

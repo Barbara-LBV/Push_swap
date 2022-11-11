@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:13 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/10 18:54:02 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:21:32 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,32 @@ void	sort_five_nb(t_list **a, t_list **b)
 		push_a(a, b);
 }
 
-/*void	radix_sorting(t_list **a, t_list **b)
+void	radix_sorting(t_list **a, t_list **b, int size)
 {
-}*/
+	int	i;
+
+	i = 0;
+	while (i <= size)
+	{
+		if ((*a)->index >> i & 1)
+			push_b(a, b);
+		else
+			ra(a);
+		i++;
+	}
+	i = 0;
+	if ((*b) != NULL)
+	{
+		while (i < get_sizelst(b))
+		{
+			if (((*b)->index >> i & 1) == 1)
+				push_a(a, b);
+			else if (((*b)->index >> i & 1) == 0)
+			rb(b);
+			i++;
+		}
+	}
+}
 
 void	sort_list(t_list **a, t_list **b, int size)
 {
@@ -74,8 +97,8 @@ void	sort_list(t_list **a, t_list **b, int size)
 		sort_three_nb(a);
 	else if (size > 3 && size <= 5)
 		sort_five_nb(a, b);
-	/*else
-		radix_sorting(a, b);*/
+	else
+		radix_sorting(a, b);
 }
 
 int main(int ac, char **av)

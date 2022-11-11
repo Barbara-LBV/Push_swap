@@ -6,7 +6,7 @@
 #    By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/13 11:53:47 by blefebvr          #+#    #+#              #
-#    Updated: 2022/10/21 16:14:28 by blefebvr         ###   ########.fr        #
+#    Updated: 2022/11/11 12:41:09 by blefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@
 CC = gcc
 
 # flags
-CFLAGS = -Wall -Wextra -Werror
-DEBUG_FLAGS = -g
+CFLAGS = -g -Wall -Wextra -Werror
 
 # artifacts
 NAME = push_swap
@@ -27,6 +26,9 @@ SRCS := push.c \
 	rotate.c \
 	rev_rotate.c \
 	push_swap.c \
+	parsing.c \
+	algo.c \
+	algo_utils.c \
 	args_utils.c
 
 # bonus source files
@@ -53,7 +55,7 @@ ${NAME}: ${OBJS}
 	${CC} ${CFLAGS} ${OBJS} ${LIBFTPRINTF} ${LIBPUSHSWAP} -o $@
 
 %.o: %.c
-	${CC} ${CFLAGS} ${DEBUG_FLAGS} -o $(<:.c=.o) -c $<
+	${CC} ${CFLAGS} -o $(<:.c=.o) -c $<
 
 clean:
 	${RM} ${OBJS}

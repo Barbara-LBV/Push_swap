@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:04:15 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/10 18:55:27 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/11 12:37:46 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,30 +104,6 @@ int	check_sorting(t_list **lst)
 		tmp = tmp->next;
 	}
 	return (1);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	nb;
-	int	neg;
-
-	i = 0;
-	nb = 0;
-	neg = 1;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			neg *= -1;
-		str++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb *= 10;
-		nb += str[i++] - '0';
-	}
-	nb *= neg;
-	return (nb);
 }
 
 /*int main(int ac, char **av)

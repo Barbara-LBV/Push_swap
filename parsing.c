@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:40:55 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/11 12:37:29 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:52:18 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	check_double(t_list **a)
 {
 	t_list	*tmp;
 
-	//if (!(*a) || (*a)->next == NULL)
-	//	return (0);
 	tmp = (*a)->next;
 	while ((*a)->next != NULL)
 	{
@@ -46,18 +44,15 @@ int	check_nb(char *s)
 
 int	check_flow(long int n)
 {
-	int	nb;
-
-	nb = n;
-	if (nb != n)
+	if (n < -2147483648 || n > 2147483647)
 		return (1);
 	return (0);
 }
 
-int	check_parsing(t_list **a, int content, char *s)
+int	check_parsing(t_list **a, long int content, char *s)
 {
 	long int	nb;
-	t_list	*tmp;
+	t_list		*tmp;
 
 	tmp = *a;
 	nb = content;
@@ -69,11 +64,11 @@ int	check_parsing(t_list **a, int content, char *s)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
-	int	i;
-	int	nb;
-	int	neg;
+	long int	nb;
+	long int	neg;
+	int			i;
 
 	i = 0;
 	nb = 0;

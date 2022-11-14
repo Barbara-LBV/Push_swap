@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:37:07 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/10 15:48:54 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:04:02 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,28 @@
 
 int	main(int ac, char **av)
 {
-	t_list	*a = NULL;
-	t_list	*b = NULL;
+	t_list	*a;
+	t_list	*b;
+	int		i;
 
-	int	i = 1;
+	a = NULL;
+	b = NULL;
+	i = 1;
 	if (ac < 2)
 		return (0);
 	while (av[i] != NULL)
 	{
-		if (check_parsing(a, av[i]) == 1)
+		a = get_list(&a, ft_atoi(av[i]));
+		if (check_parsing(&a, ft_atoi(av[i]), av[i]) == 1)
+		{
+			lstclear(&a);
 			return (0);
-		a = get_list(&a, ft_atoi(av[i++]));
+		}
+		i++;
 	}
-	while (a != NULL)
-	{
-		printf("%d ", a->content);
-		if (a->next == NULL)
-			break ;
-		a = a->next;
-	}
-	printf("\n GET INDEX : \n");
 	a = firstelement(&a);
 	get_index(a);
-	while (a != NULL)
-	{
-		printf("value : %d, index : %d\n", a->content, a->index);
-		if (a->next == NULL)
-			break ;
-		a = a->next;
-	}
-	a = firstelement(a);
-	sort_five_nb(&a, b);
-	while (a != NULL)
-	{
-		printf("index : %d, value : %d\n", a->index, a->content);
-		if (a->next == NULL)
-			break ;
-		a = a->next;
-	}
+	sort_list(&a, &b);
 	lstclear(&a);
 	lstclear(&b);
 	return (0);

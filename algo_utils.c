@@ -6,7 +6,7 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:04:15 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/11 12:37:46 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:15:58 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,30 @@ void	get_index(t_list *a)
 	}
 }
 
-int	check_sorting(t_list **lst)
+void	lstclear(t_list **lst)
 {
 	t_list	*tmp;
-	t_list	*tmp1;
 
-	tmp = *lst;
-	if (!(*lst))
-		return (1);
-	while (tmp->next != NULL)
+	if ((*lst) == NULL)
+		return ;
+	while ((*lst)->before != NULL)
+		(*lst) = (*lst)->before;
+	while (*lst)
 	{
-		tmp1 = tmp->next;
-		while (tmp1->next != NULL)
-		{
-			if (tmp->index > tmp1->index)
-				return (0);
-			tmp1 = tmp1->next;
-		}
-		if (tmp->index > tmp1->index)
-			return (0);
-		tmp = tmp->next;
+		tmp = *lst;
+		(*lst) = (*lst)->next;
+		free(tmp);
 	}
-	return (1);
+	free(*lst);
+}
+
+t_list	*get_list(t_list **a, long int content)
+{
+	if (!(*a))
+		*a = lstnew(content);
+	else
+		lstadd_end(a, lstnew(content));
+	return (*a);
 }
 
 /*int main(int ac, char **av)

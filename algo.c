@@ -6,17 +6,41 @@
 /*   By: blefebvr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:09:13 by blefebvr          #+#    #+#             */
-/*   Updated: 2022/11/11 18:21:32 by blefebvr         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:55:36 by blefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	check_sorting(t_list **lst)
+{
+	t_list	*tmp;
+	t_list	*tmp1;
+
+	tmp = *lst;
+	if (!(*lst))
+		return (1);
+	while (tmp->next != NULL)
+	{
+		tmp1 = tmp->next;
+		while (tmp1->next != NULL)
+		{
+			if (tmp->index > tmp1->index)
+				return (0);
+			tmp1 = tmp1->next;
+		}
+		if (tmp->index > tmp1->index)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 void	sort_three_nb(t_list **a)
 {
 	t_list	*tmp1;
 	t_list	*tmp2;
-	int	highest;
+	int		highest;
 
 	if (!(*a) || (*a)->next == NULL)
 		return ;
@@ -62,46 +86,47 @@ void	sort_five_nb(t_list **a, t_list **b)
 		push_a(a, b);
 }
 
-void	radix_sorting(t_list **a, t_list **b, int size)
+void	radix_sorting(t_list **a, t_list **b, int size_a)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (i <= size)
+	if (!(*a) || size_a == 1)
+		return ;
+	while (check_sorting(a) == 0)
 	{
-		if ((*a)->index >> i & 1)
-			push_b(a, b);
-		else
-			ra(a);
+		j = 0;
+		while (j < size_a)
+		{
+			if (((*a)->index >> i & 1) == 0)
+				push_b(a, b);
+			else
+				ra(a);
+			j++;
+		}
+		while ((*b) != NULL)
+			push_a(a, b);
 		i++;
 	}
-	i = 0;
-	if ((*b) != NULL)
-	{
-		while (i < get_sizelst(b))
-		{
-			if (((*b)->index >> i & 1) == 1)
-				push_a(a, b);
-			else if (((*b)->index >> i & 1) == 0)
-			rb(b);
-			i++;
-		}
-	}
 }
 
-void	sort_list(t_list **a, t_list **b, int size)
+void	sort_list(t_list **a, t_list **b)
 {
-	if (size < 2)
+	int	size_a;
+
+	size_a = get_sizelst(a);
+	if (!(*a) || size_a < 2)
 		return ;
-	if (size <= 3)
+	if (size_a > 1 && size_a <= 3)
 		sort_three_nb(a);
-	else if (size > 3 && size <= 5)
+	else if (size_a > 3 && size_a <= 5)
 		sort_five_nb(a, b);
 	else
-		radix_sorting(a, b);
+		radix_sorting(a, b, size_a);
 }
 
-int main(int ac, char **av)
+/*int main(int ac, char **av)
 {
 	t_list	*test = NULL;
 	t_list	*test1 = NULL;
@@ -134,9 +159,9 @@ int main(int ac, char **av)
 		test = test->next;
 	}
 	test = firstelement(&test);
-	int size = get_sizelst(&test);
+	int size_a = get_sizelst(&test);
 	printf("\n-->SORT NB : \n");
-	sort_list(&test, &test1, size);
+	sort_list(&test, &test1, size_a);
 	printf("\n-->New list a\n");
 	while (test != NULL)
 	{
@@ -161,4 +186,4 @@ int main(int ac, char **av)
 	lstclear(&test);
 	lstclear(&test1);
 	return (0);
-}
+}*/
